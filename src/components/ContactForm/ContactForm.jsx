@@ -12,7 +12,7 @@ import {
 } from './ContactForm.styled';
 import { selectContacts } from 'redux/selectors';
 
-const phoneRegExp = /^\d{3}-\d{3}-\d{4}$/;
+const phoneRegExp = /^(\+?\d+)?\s*(\(\d+\))?[\s-]*([\d-]*)$/;
 const nameRegExp = /^(([a-zA-Z' -]{1,80})|([а-яА-ЯЁёІіЇїҐґЄє' -]{1,80}))$/u;
 
 const ContactSchema = Yup.object().shape({
@@ -28,8 +28,8 @@ const ContactSchema = Yup.object().shape({
       phoneRegExp,
       'Phone number must be digits and can contain dashes, parentheses and can start with +'
     )
-    .min(10, 'Too short!')
-    .max(12, 'Too long!')
+    .min(16, 'Too short!')
+    .max(18, 'Too long!')
     .required('Required!'),
 });
 
@@ -66,7 +66,7 @@ export const ContactForm = () => {
           <FieldInput
             id="phone"
             name="phone"
-            placeholder="XXX-XXX-XXXX"
+            placeholder="+XX(XXX)-XXX-XX-XX"
             type="phone"
           />
           <ErrMessage name="phone" component="div" />
